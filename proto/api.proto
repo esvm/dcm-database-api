@@ -18,12 +18,12 @@ message Metric {
 }
 
 message InsertItemRequest {
-    string topic_id = 1;
+    string topic_name = 1;
     repeated Metric metrics = 2;
 }
 
 message GetItemsRequest {
-    string topic_id = 1;
+    string topic_name = 1;
     int32 minutes_ago = 2;
 }
 
