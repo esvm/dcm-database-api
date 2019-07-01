@@ -1,4 +1,4 @@
-sintax = "proto3";
+syntax = "proto3";
 
 package api;
 
@@ -9,17 +9,17 @@ service DcmApiDatabaseService {
     rpc GetItems (GetItemsRequest) returns (GetItemsResponse);
 }
 
-message Metrics {
-    repeated float average = 2;
-    repeated float median = 3;
-    repeated float variance = 4;
-    repeated float standard_deviation = 5;
-    repeated float mode = 6;
+message Metric {
+    float average = 1;
+    float median = 2;
+    float variance = 3;
+    float standard_deviation = 4;
+    float mode = 5;
 }
 
 message InsertItemRequest {
     string topic_id = 1;
-    Metrics metrics = 2;
+    repeated Metric metrics = 2;
 }
 
 message GetItemsRequest {
@@ -28,5 +28,5 @@ message GetItemsRequest {
 }
 
 message GetItemsResponse {
-    Metrics metrics = 2;
+    repeated Metric metrics = 1;
 }
