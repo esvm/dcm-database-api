@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-api
+  template:
+    metadata:
+      labels:
+        app: database-api
+    spec:
+      containers:
+      - name: influxdb
+        image: influxdb
+        ports:
+        - containerPort: 8086
+        env:
+          - name: INFLUXDB_DB
+            value: "broker"
+          - name: INFLUXDB_USER
+            value: "influxdb"
+          - name: INFLUXDB_USER_PASSWORD
+            value: "123"
+      - name: grpc-server
+        image: esvm/dcm-database-api
+        ports:
+        - containerPort: 50051
+        env:
+          - name: INFLUX_DB_HOST
+            value: "localhost:8086"
+          - name: INFLUX_DB_USERNAME
+            value: "influxdb"
+          - name: INFLUX_DB_PASSWORD
+            value: "123"
+          - name: INFLUX_DB_DATABASE
+            value: "broker"

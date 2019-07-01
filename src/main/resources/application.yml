@@ -12,10 +12,10 @@ management:
           prometheus: /metrics
 influx-db:
   data-source:
-    url: http://localhost:8086
-    username: influxdb
-    password: 123
-    database: broker
+    url: $(INFLUX_DB_HOST)
+    username: $(INFLUX_DB_USERNAME)
+    password: $(INFLUX_DB_PASSWORD)
+    database: $(INFLUX_DB_DATABASE)
 name: views-api
 version: 1.0.0
 logging:
