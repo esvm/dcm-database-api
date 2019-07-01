@@ -1,0 +1,23 @@
+grpc:
+  port: 50051
+management:
+  server:
+    port: 9001
+  endpoints:
+      web:
+        exposure:
+          include: ["info", "health", "prometheus"]
+        base-path: /
+        path-mapping:
+          prometheus: /metrics
+influx-db:
+  data-source:
+    url: http://localhost:8086
+    username: influxdb
+    password: 123
+    database: broker
+name: views-api
+version: 1.0.0
+logging:
+  level:
+    root: INFO

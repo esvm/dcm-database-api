@@ -1,11 +1,11 @@
 version: "2.1"
-services:
+services: 
   influxdb:
     container_name: "influxdb"
     image: "influxdb"
     ports:
       - "8086:8086"
     environment:
-      INFLUXDB_DB: "broker"
-      INFLUXDB_USER: "influxdb"
-      INFLUXDB_USER_PASSWORD: "gDv%0s%zsiYxP08"
+          INFLUXDB_DB: "broker"
+          INFLUXDB_USER: "influxdb"
+          INFLUXDB_USER_PASSWORD: "123"
