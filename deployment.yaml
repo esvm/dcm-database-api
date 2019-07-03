@@ -14,6 +14,11 @@ spec:
     spec:
       containers:
         - name: influxdb
+          resources:
+            requests:
+              cpu: 100m
+            limits:
+              cpu: 150m
           image: influxdb
           ports:
             - containerPort: 8086
@@ -28,6 +33,11 @@ spec:
                   name: database-api-influx-db-password-secret
                   key: auth
         - name: grpc-server
+          resources:
+            requests:
+              cpu: 200m
+            limits:
+              cpu: 250m
           image: esvm/dcm-database-api
           ports:
             - containerPort: 50051
