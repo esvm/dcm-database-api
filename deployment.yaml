@@ -26,7 +26,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: database-api-influx-db-password-secret
-                  key: token
+                  key: auth
         - name: grpc-server
           image: esvm/dcm-database-api
           ports:
@@ -40,6 +40,6 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: database-api-influx-db-password-secret
-                  key: token
+                  key: auth
             - name: INFLUX_DB_DATABASE
               value: "broker"

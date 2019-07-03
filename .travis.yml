@@ -1,0 +1,27 @@
+language: java
+jdk:
+  - oraclejdk8
+env:
+    global:
+      - PATH=$PATH:$HOME/google-cloud-sdk/bin
+      - PROJECT_ID="dcm-middleware"
+      - ZONE="us-east1-b"
+      - IMAGE_NAME=esvm/dcm-database-api
+      - GOOGLE_APPLICATION_CREDENTIALS="${PWD}/dcm-middleware.json"
+      - CLUSTER_NAME=dcm-middleware-cluster-1
+services:
+  - docker
+  - gcloud
+before_install: 
+  - openssl aes-256-cbc -K $encrypted_e39e709a7d2a_key -iv $encrypted_e39e709a7d2a_iv -in dcm-middleware.json.enc -out dcm-middleware.json -d
+  - curl https://Sid.cloud.google.com | bash  
+  - source /home/travis/.bashrc
+  - gcloud auth activate-service-account --key-file "${GOOGLE_APPLICATION_CREDENTIALS}"
+  - gcloud config set project $PROJECT_ID
+  - gcloud config set compute/zone $ZONE
+install: true
+before_script: 
+  - docker build -t $IMAGE_NAME .
+script:
+- gcloud container clusters get-credentials $CLUSTER_NAME
+- kubectl apply -f deployment.yaml
