@@ -9,3 +9,13 @@ services:
           INFLUXDB_DB: "broker"
           INFLUXDB_USER: "influxdb"
           INFLUXDB_USER_PASSWORD: "123"
+  grpc-server:
+    container_name: "grpc-server"
+    image: "esvm/dcm-database-api"
+    ports:
+      - "50051:50051"
+    environment:
+          INFLUX_DB_HOST: "localhost:8086"
+          INFLUX_DB_USERNAME: "influxdb"
+          INFLUX_DB_PASSWORD: "123"
+          INFLUX_DB_DATABASE: "broker"
